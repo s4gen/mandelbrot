@@ -2,10 +2,8 @@
     margin-bottom: 5px;
     font-size: 20px
 }
-
-#speed {
-    margin-bottom: 5px;
-    font-size: 20px
+#zoom {
+    width: 220px;
 }
 
 #render {
@@ -16,29 +14,21 @@
     font-size: 20px
 }
 
-p {
-    font-size: 20px;
-    display: flex;
-    justify-content: center
-}
-
-h1 {
-    font-size: 50px;
-    display: flex;
-    justify-content: center
-}
-
 canvas {
-    margin-left: 12%;
-    margin-top: -90px;
+    margin-left: 100px;
+    margin-top: -120px;
     border: 5px outset rgb(0, 0, 0);
     position: absolute;
-    width: 1275px;
-    height: 850px;
+    cursor: zoom-in;
 }
 
 #loadingDisplay {
     font-size: 20px;
     margin-left: 75px;
     display: inline;
+}
+
+zoomDisplay {
+    padding-left: 95px;
+    font-size: 20px;
 }

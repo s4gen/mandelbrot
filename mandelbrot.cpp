@@ -1,7 +1,4 @@
-// mandelbrot.cpp
-#include <cmath>
 #include <cstdint>
-
 
 struct Complex {
     double real;
@@ -19,8 +16,8 @@ struct Complex {
         return Complex(r, i);
     }
 
-    double abs() const {
-        return std::sqrt(real * real + imaginary * imaginary);
+    double abs_squared() const {
+        return real * real + imaginary * imaginary;
     }
 };
 
@@ -30,7 +27,7 @@ extern "C" {
         Complex z(0, 0);
         int32_t iterations = 0;
 
-        while (z.abs() < 2 && iterations < maxIterations) {
+        while (z.abs_squared() < 4 && iterations < maxIterations) {
             z = z.square().add(c);
             iterations++;
         }

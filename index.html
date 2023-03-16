@@ -7,17 +7,7 @@
       <link rel="stylesheet" href="style.css">
    </head>
    <body>
-      <h1>The Mandelbrot Set</h1>
-      <p>
-         The Mandelbrot set is a set of complex numbers c for which the function
-         <code>‎ f<sub>c</sub>(z) = z<sup>2</sup> + c ‎ </code>‎  does not diverge when iterated
-         from <code>z = 0</code>, i.e., for which the sequence 
-         <code>‎  0, f<sub>c</sub>(0), f<sub>c</sub>(f<sub>c</sub>(0)), ...</code>
-         remains bounded in absolute value.
-      </p>
       <form>
-        <input type="number" id="speed" name="Speed" placeholder="Speed" min="1" value="10" step="1">
-         <br>
          <input type="number" id="iterations" name="iterations" placeholder="Iterations" value="" step="50">
          <br>
          <input type="button" id="render" name="render" value="Render">
@@ -25,8 +15,10 @@
          <loadDisplay id="loadingDisplay"></loadDisplay>
       </form>
       
-      <input type="range" id="zoom" name="zoom" value="2" min="1" max="3" step="0.1">
-      <canvas id="canvas" width="1272px" height="850px"></canvas>
+      <input type="range" id="zoom" name="zoom" value="2" min="1" max="5" step="0.1">
+      <br>
+      <zoomDisplay id="zoomDisplay">2.0x</zoomDisplay>
+      <canvas id="canvas" width="1900px" height="1266"></canvas>
       <script>
          var Module = {};
          Module.onRuntimeInitialized = function() {
