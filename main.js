@@ -4,30 +4,18 @@ const iterationInput = document.getElementById('iterations');
 const button = document.getElementById('render');
 const loading = document.getElementById('loadingDisplay');
 const zoom = document.getElementById('zoom');
+const currentZoom = document.getElementById('currentZoom');
+let zoomVal = 100;
 let rendering = false;
 
 const zoomInput = document.getElementById('zoom');
 const zoomDisplay = document.getElementById('zoomDisplay');
-
+let times = []
 zoomInput.addEventListener('input', () => {
-  switch (zoomInput.value) {
-    case '1':
-      zoomDisplay.textContent = '1.0x';
-      break;
-    case '2':
-      zoomDisplay.textContent = '2.0x';
-      break;
-    case '3':
-      zoomDisplay.textContent = '3.0x';
-      break;
-    case '4':
-      zoomDisplay.textContent = '4.0x';
-      break;
-    case '5':
-      zoomDisplay.textContent = '5.0x';
-      break;
-    default:
-      zoomDisplay.textContent = `${zoomInput.value}x`;
+  if ((zoomInput.value*10) % 10 == 0) {
+    zoomDisplay.innerHTML = `${zoomInput.value}.0x`;
+  } else {
+    zoomDisplay.innerHTML = `${zoomInput.value}x`;
   }
 });
 
@@ -43,6 +31,7 @@ let xmin = -2;
 let xmax = 1;
 let ymin = -1;
 let ymax = 1;
+
 
 initWasm().then((wasmExports) => {
   function renderFractal(xmin, xmax, ymin, ymax) {
@@ -87,6 +76,10 @@ initWasm().then((wasmExports) => {
       return;
     }
 
+    zoomVal *= parseFloat(zoom.value);
+
+    currentZoom.innerHTML = `Current Zoom: ${zoomVal}%`;
+
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
@@ -115,6 +108,14 @@ initWasm().then((wasmExports) => {
     }
     const start = Date.now()
     renderFractal(xmin, xmax, ymin, ymax);
+    times.push((Date.now() - start)/1000);
     console.log(`${(Date.now() - start)/1000}s`);
+    let average = 0;
+    for (let i = 0; i < times.length; i++) {
+      average += times[i];
+    }
+
+    average /= times.length;
+    console.log(`Average: ${average}s`)
   });
 });
